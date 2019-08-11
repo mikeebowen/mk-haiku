@@ -1,0 +1,15 @@
+{
+  "name": "mk-haiku",
+  "version": "0.0.1",
+  "description": "A package to create random haikus",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "haiku",
+    "random"
+  ],
+  "author": "Michael Bowen",
+  "license": "MIT"
+}
