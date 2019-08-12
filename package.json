@@ -11,5 +11,10 @@
     "random"
   ],
   "author": "Michael Bowen",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "dotenv": "^8.0.0",
+    "syllable": "^3.6.1"
+  }
 }
