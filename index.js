@@ -6,12 +6,11 @@ const axios = require('axios');
 const apiHost = process.env.WORDS_API_HOST;
 const apiKey = process.env.WORDS_API_KEY;
 
-async function getHaiku(syllables) {
+async function getHaikuWord(syllables) {
   let haiku;
   let syllableCount =  0;
-  let callCount = 0;
+
   while(syllableCount < syllables) {
-    callCount++;
     const data = await axios.get(`https://${apiHost}/words/`, {
       headers: {
         'x-rapidapi-host': apiHost,
@@ -19,7 +18,7 @@ async function getHaiku(syllables) {
       },
       params: {
         random: true,
-        soundsMax: 12,
+        soundsMax: 10,
         limit: 100,
       },
     })
@@ -40,25 +39,40 @@ async function getHaiku(syllables) {
       syllableCount += syllablesInWord;
     }
   }
-  console.log(callCount);
-  console.log(haiku);
+  return haiku;
 }
 
-for (let i = 0; i < 3; i++) {
-  let syllables;
+async function getHaiku() {
+  let haiku = [];
+  for (let i = 0; i < 3; i++) {
+    let syllables;
 
-  switch (i) {
-    case 0:
-      syllables = 5;
-      break;
-    case 1:
-      syllables = 7;
-      break;
-    case 2:
-      syllables = 5;
-      break;
-    default:
-      break;
+    switch (i) {
+      case 0:
+        syllables = 5;
+        break;
+      case 1:
+        syllables = 7;
+        break;
+      case 2:
+        syllables = 5;
+        break;
+      default:
+        break;
+    }
+    const word = await getHaikuWord(syllables);
+    const sylCount = countSyllables(word);
+    if (sylCount === 5 && !haiku[0]) {
+      haiku[0] = word;
+    } else if (sylCount === 7) {
+      haiku[1] = word;
+    } else {
+      haiku[2] = word;
+    }
   }
-  getHaiku(syllables);
+
+  haiku.forEach(h => console.log(h));
 }
+
+getHaiku()
+.catch(err => console.error(err));
