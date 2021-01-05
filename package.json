@@ -13,7 +13,7 @@
   "author": "Michael Bowen",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "dotenv": "^8.0.0",
     "syllable": "^4.0.0"
   }
